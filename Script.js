@@ -1,5 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const scoreDisplay = document.getElementById('score');
+const startButton = document.getElementById('startButton');
 
 // Configurações do jogo
 let bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.5, lift: -10, velocity: 0 };
@@ -9,6 +11,7 @@ let score = 0;
 const pipeWidth = 50;
 const pipeGap = 100;
 const pipeSpeed = 2;
+let gameRunning = false;
 
 // Função para desenhar o pássaro
 function drawBird() {
@@ -68,6 +71,8 @@ function resetGame() {
     bird.velocity = 0;
     pipes = [];
     score = 0;
+    gameRunning = false;
+    startButton.style.display = 'block'; // Mostrar o botão para reiniciar
 }
 
 // Função para desenhar o jogo
@@ -75,14 +80,12 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBird();
     drawPipes();
-
-    ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
-    ctx.fillText(`Score: ${score}`, 10, 30);
+    scoreDisplay.innerText = `Score: ${score}`;
 }
 
 // Função principal do jogo
 function gameLoop() {
+    if (!gameRunning) return; // Não atualizar se o jogo não estiver em execução
     update();
     draw();
     frame++;
@@ -91,8 +94,17 @@ function gameLoop() {
 
 // Controle do pássaro
 window.addEventListener('click', () => {
-    bird.velocity = bird.lift;
+    if (gameRunning) {
+        bird.velocity = bird.lift;
+    }
 });
 
-// Iniciar o jogo
-gameLoop();
+// Botão para iniciar o jogo
+startButton.addEventListener('click', () => {
+    gameRunning = true;
+    startButton.style.display = 'none'; // Ocultar botão ao iniciar
+    gameLoop(); // Iniciar o loop do jogo
+});
+
+// Estilo inicial
+scoreDisplay.style.display = 'block';
