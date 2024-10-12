@@ -2,12 +2,13 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 // Configurações do jogo
-let bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.6, lift: -15, velocity: 0 };
+let bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.5, lift: -10, velocity: 0 };
 let pipes = [];
 let frame = 0;
 let score = 0;
 const pipeWidth = 50;
 const pipeGap = 100;
+const pipeSpeed = 2;
 
 // Função para desenhar o pássaro
 function drawBird() {
@@ -42,7 +43,7 @@ function update() {
 
     // Atualizar canos
     pipes.forEach(pipe => {
-        pipe.x -= 2;
+        pipe.x -= pipeSpeed;
     });
 
     // Remover canos fora da tela
@@ -76,7 +77,8 @@ function draw() {
     drawPipes();
 
     ctx.fillStyle = 'black';
-    ctx.fillText(`Score: ${score}`, 10, 20);
+    ctx.font = '20px Arial';
+    ctx.fillText(`Score: ${score}`, 10, 30);
 }
 
 // Função principal do jogo
