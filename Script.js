@@ -103,8 +103,10 @@ window.addEventListener('click', () => {
 startButton.addEventListener('click', () => {
     gameRunning = true;
     startButton.style.display = 'none'; // Ocultar botão ao iniciar
+    pipes = []; // Limpar canos
+    score = 0; // Resetar pontuação
+    bird.y = 150; // Resetar posição do pássaro
+    bird.velocity = 0; // Resetar velocidade
+    frame = 0; // Resetar o frame
     gameLoop(); // Iniciar o loop do jogo
 });
-
-// Estilo inicial
-scoreDisplay.style.display = 'block';
