@@ -8,22 +8,40 @@
         body {
             background-color: #70c5ce;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
         canvas {
             background-color: #70c5ce;
             border: 2px solid #000;
         }
+
+        #startButton {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #score {
+            font-size: 20px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: black;
+        }
     </style>
 </head>
 <body>
     <canvas id="gameCanvas" width="288" height="512"></canvas>
+    <div id="score"></div>
+    <button id="startButton">Iniciar Jogo</button>
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
